@@ -17,7 +17,7 @@ el("cancelPassword").onclick=()=>{setPublic();notify("Accedi con le credenziali 
 el("passwordChangeForm").onsubmit=async ev=>{ev.preventDefault();const p=el("currentPwd").value,n=el("newPwd").value,c=el("confirmPwd").value;if(n!==c)return notify("Le due nuove password non coincidono.","error");if(n.length<10||n===p)return notify("Scegli una password nuova e diversa, con almeno 10 caratteri.","error");const btn=el("passwordChangeForm").querySelector("button");btn.disabled=true;try{let r=await fetch(API+"/functions/v1/change-app-password",{method:"POST",headers:secureHeaders({"Content-Type":"application/json"}),body:JSON.stringify({current_password:p,new_password:n}),cache:"no-store"});let x=await r.json();if(!r.ok||!x.ok)throw Error(x.error||"Cambio password non riuscito.");setPublic();notify("Password aggiornata. Accedi ora con la nuova password personale CIGEA.","ok")}catch(e){notify(e.message,"error")}finally{btn.disabled=false}};
 el("logout").onclick=async()=>{try{await api("/auth/v1/logout",{method:"POST"})}catch(_){}setPublic();notify("Sessione terminata.","ok")};
 async function loadPatients(){patients=await api("/rest/v1/patients?select=id,paziente,nascita&order=paziente.asc&limit=2000");listPatients()}
-const normalizePatient=s=>String(s||"").normalize("NFD").replace(/[\\u0300-\\u036f]/g,"").toLocaleLowerCase("it").replace(/\\s+/g," ").trim();
+const normalizePatient=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("it").replace(/\s+/g," ").trim();
 let searchMatches=[];
 function listPatients(){
  const q=normalizePatient(el("search").value);
