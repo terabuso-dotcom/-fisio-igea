@@ -1,0 +1,18 @@
+{
+  "name": "CIGEA Linfoterapia — Photo e Misure",
+  "short_name": "CIGEA Linfoterapia",
+  "description": "App privata CIGEA per foto cliniche e misurazioni",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "theme_color": "#12465a",
+  "background_color": "#f2f6f7",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
